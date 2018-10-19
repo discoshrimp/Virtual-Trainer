@@ -14,26 +14,26 @@ handleNutritionInput = ()=>{
 }
   render() {
     return (
-			<div className="App">
-        <SignUp/>
-      </div>
-		);
-	}
-}
-//     <Router>
-// 	    <div>
+    <Router>
+	    <div >
 	     
+<<<<<<< HEAD
 // 	      <Switch>
 //          <Route exact path = '/' component{SignUp} />
 // 	        <Route exact path="/articles" component={Articles} />
 //          <Route exact path ='/edamam/ component = {Edamam} />
+=======
+	      <Switch>
+	        <Route exact path="/articles" component={Articles} />
+	        <Route exact path="/" component={SignUp}/>
+	      </Switch>
+	    </div>
+  	</Router>
+>>>>>>> b91893a314e567c94e91accfd2b0bb52e8044e60
 
-// 	      </Switch>
-// 	    </div>
-//   	</Router>
+    );
+  }
 
-//     );
-//   }
-// }
+}
 
 export default App;

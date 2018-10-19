@@ -18,6 +18,7 @@ router.get("/api/users/:id", controllers.findOneUser);
 
 router.post("/api/users", controllers.createUser);
 
+
 router.get("/articles", (req,res)=>{
 
 
