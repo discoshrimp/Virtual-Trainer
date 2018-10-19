@@ -8,24 +8,19 @@ import Articles from "./pages/Articles"
 class App extends Component {
   render() {
     return (
-			<div className="App">
-        <SignUp/>
-      </div>
-		);
-	}
-}
-//     <Router>
-// 	    <div>
+    <Router>
+	    <div >
 	     
-// 	      <Switch>
-// 	        <Route exact path="/articles" component={Articles} />
+	      <Switch>
+	        <Route exact path="/articles" component={Articles} />
+	        <Route exact path="/" component={SignUp}/>
+	      </Switch>
+	    </div>
+  	</Router>
 
-// 	      </Switch>
-// 	    </div>
-//   	</Router>
+    );
+  }
 
-//     );
-//   }
-// }
+}
 
 export default App;

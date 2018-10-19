@@ -5,6 +5,7 @@ const request = require("request");
 const path = require("path");
 
 
+
 router.get("/api/food", controllers.findAllFood);
 
 router.post("/api/food", controllers.createFood);
@@ -17,6 +18,7 @@ router.get("/api/users/:id", controllers.findOneUser);
 
 router.post("/api/users", controllers.createUser);
 
+
 router.get("/articles", (req,res)=>{
 
 
@@ -28,5 +30,6 @@ router.get("/articles", (req,res)=>{
 	});
 	
 })
+
 
 module.exports = router;
