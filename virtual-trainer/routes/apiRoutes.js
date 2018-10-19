@@ -5,6 +5,7 @@ const request = require("request");
 const path = require("path");
 
 
+
 router.get("/api/food", controllers.findAllFood);
 
 router.post("/api/food", controllers.createFood);
@@ -25,8 +26,18 @@ router.get("/articles", (req,res)=>{
 	authKey + "&q=Weightloss";
 	request.get(queryURL, (error, response, data)=>{
 		res.send(JSON.parse(data).response.docs);
-	});
-	
+	});	
+router.post("/edamam", (req, res)=>{
+	const app_key = '88aaf88bd591b1d07bffc2ee29030aa5'
+	const app_id = 'e5ea3d28'
+	const edamam = `http://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`
+	request.post({
+		headers: 'Content-Type: application/json',
+		url: edamam,
+		body: req.params.body
+	}).then( data=>{
+		res.json(data)
+	})
 })
-
 module.exports = router;
+})

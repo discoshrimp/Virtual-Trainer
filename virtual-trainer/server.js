@@ -34,8 +34,7 @@ if (process.env.NODE_ENV === "production") {
 // app.use("/api", apiRoutes);
 
 //routes required for authentication
-app.use("", apiRoutes);
-
+app.use("/", apiRoutes);
 //Sessions
 app.use(
   session({
