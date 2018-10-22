@@ -7,14 +7,7 @@ class Signup extends Component {
     this.state = {
       username: "",
       password: "",
-      confirmPassword: "",
-      age: "",
-      sex: "",
-      weight: "",
-      height: "",
-      phoneNumber: "",
-      goal: "",
-      recommendedIntake: ""
+      confirmPassword: ""
     };
     //To keep the value of the input bocxes to always be current with 'state'
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -32,7 +25,41 @@ class Signup extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("SignUp form: ", this.state.username);
-    //request to server code goes
+    if (this.state.password !== this.state.confirmPassword) {
+      alert("Password do not match");
+    } else if (this.state.username || this.state.password !== "") {
+      //request to server code goes
+      let newUserToBeSaved = {
+        userName: this.state.username,
+        password: this.state.password
+      };
+      console.log("new User: ", newUserToBeSaved);
+      axios
+        .post("/signup", {
+          userName: this.state.username,
+          password: this.state.password
+        })
+        .then(response => {
+          console.log("response: ", response);
+          if (!response.data.error) {
+            console.log("Username accepted!!");
+            this.setState({
+              redirectTo: "/login"
+            });
+          } else {
+            alert("Username is taken");
+            // console.log("error: ", err);
+            this.setState.username = "";
+            this.setState.password = "";
+            this.setState.confirmPassword = "";
+          }
+        })
+        .catch(err => {
+          console.log("sign up error: ", err);
+        });
+    } else {
+      alert("Pls provide with username and password");
+    }
   };
   render() {
     return (
@@ -87,132 +114,6 @@ class Signup extends Component {
                 name="confirmPassword"
                 placeholder="confirm password"
                 value={this.state.confirmPassword}
-                onChange={this.handleInputChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="age">
-                Age
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
-                type="text"
-                id="age"
-                name="age"
-                placeholder="age"
-                value={this.state.age}
-                onChange={this.handleInputChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="gender">
-                Gender
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
-                type="text"
-                id="gender"
-                name="gender"
-                placeholder="gender"
-                value={this.state.gender}
-                onChange={this.handleInputChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="weight">
-                Weight
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
-                type="text"
-                id="weight"
-                name="weight"
-                placeholder="weight(lb)"
-                value={this.state.weight}
-                onChange={this.handleInputChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="height">
-                Height
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
-                type="text"
-                id="height"
-                name="height"
-                placeholder="height(in feet)"
-                value={this.state.height}
-                onChange={this.handleInputChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="phonenumber">
-                Phone number
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
-                type="text"
-                id="phonenumber"
-                name="phonenumber"
-                placeholder="phone number"
-                value={this.state.phonenumber}
-                onChange={this.handleInputChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="goal">
-                Goal
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <textarea
-                className="form-input"
-                type="text"
-                id="goal"
-                name="goal"
-                placeholder="goal"
-                value={this.state.goal}
-                onChange={this.handleInputChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="recommendedIntake">
-                Recommended Intake
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <textarea
-                className="form-input"
-                type="text"
-                id="recommendedIntake"
-                name="recommendedIntake"
-                placeholder="recommended intake"
-                value={this.state.recommendedIntake}
                 onChange={this.handleInputChange}
               />
             </div>

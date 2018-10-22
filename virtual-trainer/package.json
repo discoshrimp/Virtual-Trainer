@@ -21,7 +21,9 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
+    "connect-mongo": "^2.0.1",
     "express": "^4.15.4",
     "express-session": "^1.15.6",
     "if-env": "^1.0.4",
