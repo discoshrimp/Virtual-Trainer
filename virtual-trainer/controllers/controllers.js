@@ -1,7 +1,11 @@
 const db = require("../Models");
+<<<<<<< HEAD
 const date = new Date()
 
 
+=======
+
+>>>>>>> adding the signup page
 module.exports = {
   findAllFood: (req, res) => {
     db.Food.find()
@@ -13,6 +17,7 @@ module.exports = {
         res.json(err);
       });
   },
+<<<<<<< HEAD
 findDateFood:(req, res) =>{
 db.food.find({_date: date })
 .then(data =>{
@@ -22,6 +27,9 @@ res.json(data)
     res.json(err)
   })
 },
+=======
+
+>>>>>>> adding the signup page
   findOneFood: (req, res) => {
     db.Food.findOne({ _id: req.params.id })
       .then(data => {
@@ -73,7 +81,10 @@ res.json(data)
       });
   },
   createUser: (req, res) => {
+<<<<<<< HEAD
     console.log(req.body)
+=======
+>>>>>>> adding the signup page
     const { userName, password } = req.body;
     console.log("user to be saved: ", userName, password);
     //Adding th validation

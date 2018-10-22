@@ -25,7 +25,41 @@ class Signup extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("SignUp form: ", this.state.username);
-    //request to server code goes
+    if (this.state.password !== this.state.confirmPassword) {
+      alert("Password do not match");
+    } else if (this.state.username || this.state.password !== "") {
+      //request to server code goes
+      let newUserToBeSaved = {
+        userName: this.state.username,
+        password: this.state.password
+      };
+      console.log("new User: ", newUserToBeSaved);
+      axios
+        .post("/signup", {
+          userName: this.state.username,
+          password: this.state.password
+        })
+        .then(response => {
+          console.log("response: ", response);
+          if (!response.data.error) {
+            console.log("Username accepted!!");
+            this.setState({
+              redirectTo: "/login"
+            });
+          } else {
+            alert("Username is taken");
+            // console.log("error: ", err);
+            this.setState.username = "";
+            this.setState.password = "";
+            this.setState.confirmPassword = "";
+          }
+        })
+        .catch(err => {
+          console.log("sign up error: ", err);
+        });
+    } else {
+      alert("Pls provide with username and password");
+    }
   };
   render() {
     return (
@@ -80,7 +114,7 @@ class Signup extends Component {
                 name="confirmPassword"
                 placeholder="confirm password"
                 value={this.state.confirmPassword}
-                handleInputChange={this.handleInputChange}
+                onChange={this.handleInputChange}
               />
             </div>
           </div>
