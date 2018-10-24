@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import SignUp from './pages/SignUp/SignUp';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import API from "./apiRoutes/apiRoutes"
+// r
 import './App.css';
-import Articles from "./pages/Article/Articles"
+import Articles from "./pages/Article/"
+import Edamam from './pages/Nutrition'
 
 
 class App extends Component {
 
-handleNutritionInput = ()=>{
-
-
-}
   render() {
     return (
     <Router>
@@ -19,7 +16,7 @@ handleNutritionInput = ()=>{
  	      <Switch>
           <Route exact path = '/' component={SignUp} />
  	        <Route exact path="/articles" component={Articles} />
-          <Route exact path ='/edamam/' component = {Edamam} />
+          <Route exact path ='/nutrition/' component = {Edamam} />
           </Switch>
         </div>
       </Router>

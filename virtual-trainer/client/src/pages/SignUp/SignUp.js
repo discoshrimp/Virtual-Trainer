@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
+import API from '../../utils'
 
 class Signup extends Component {
   constructor() {
@@ -34,29 +35,30 @@ class Signup extends Component {
         password: this.state.password
       };
       console.log("new User: ", newUserToBeSaved);
-      axios
-        .post("/signup", {
-          userName: this.state.username,
-          password: this.state.password
-        })
-        .then(response => {
-          console.log("response: ", response);
-          if (!response.data.error) {
-            console.log("Username accepted!!");
-            this.setState({
-              redirectTo: "/login"
-            });
-          } else {
-            alert("Username is taken");
-            // console.log("error: ", err);
-            this.setState.username = "";
-            this.setState.password = "";
-            this.setState.confirmPassword = "";
-          }
-        })
-        .catch(err => {
-          console.log("sign up error: ", err);
-        });
+       API.createUser(newUserToBeSaved)
+      // axios
+      //   .post("/createuser", {
+      //     userName: this.state.username,
+      //     password: this.state.password
+      //   })
+      //   .then(response => {
+      //     console.log("response: ", response);
+      //     if (!response.data.error) {
+      //       console.log("Username accepted!!");
+      //       this.setState({
+      //         redirectTo: "/login"
+      //       });
+      //     } else {
+      //       alert("Username is taken");
+      //       // console.log("error: ", err);
+      //       this.setState.username = "";
+      //       this.setState.password = "";
+      //       this.setState.confirmPassword = "";
+      //     }
+      //   })
+      //   .catch(err => {
+      //     console.log("sign up error: ", err);
+      //   });
     } else {
       alert("Pls provide with username and password");
     }
@@ -80,7 +82,7 @@ class Signup extends Component {
                 name="username"
                 placeholder="username"
                 value={this.state.username}
-                handleInputChange={this.handleInputChange}
+                onChange={this.handleInputChange}
               />
             </div>
             {/* </div> */}
@@ -98,7 +100,7 @@ class Signup extends Component {
                 name="password"
                 placeholder="password"
                 value={this.state.password}
-                handleInputChange={this.handleInputChange}
+                onChange={this.handleInputChange}
               />
             </div>
             <div className="col-md-4 col-sm-12 col-xs-12">
@@ -114,7 +116,7 @@ class Signup extends Component {
                 name="confirmPassword"
                 placeholder="confirm password"
                 value={this.state.confirmPassword}
-                handleInputChange={this.handleInputChange}
+                onChange={this.handleInputChange}
               />
             </div>
           </div>

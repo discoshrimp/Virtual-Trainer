@@ -1,10 +1,11 @@
 const express = require("express");
+// const Router = require('express').Router()
 const path = require("path");
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
-const apiRoutes = require("./routes/apiRoutes");
+const apiRoutes = require("./routes");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -43,7 +44,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //routes required for authentication
-app.use("/", apiRoutes);
+app.use('/', apiRoutes);
+
 //Sessions
 app.use(
   session({
