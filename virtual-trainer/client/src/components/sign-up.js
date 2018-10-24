@@ -80,7 +80,7 @@ class Signup extends Component {
                 name="username"
                 placeholder="username"
                 value={this.state.username}
-                handleInputChange={this.handleInputChange}
+                onChange={this.handleInputChange}
               />
             </div>
             {/* </div> */}
@@ -98,7 +98,7 @@ class Signup extends Component {
                 name="password"
                 placeholder="password"
                 value={this.state.password}
-                handleInputChange={this.handleInputChange}
+                onChange={this.handleInputChange}
               />
             </div>
             <div className="col-md-4 col-sm-12 col-xs-12">
