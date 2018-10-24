@@ -28,10 +28,7 @@
     "express-session": "^1.15.6",
     "if-env": "^1.0.4",
     "mongoose": "^5.0.17",
-<<<<<<< HEAD
     "morgan": "^1.9.1",
-=======
->>>>>>> 8650685e34d77ba7e80b7604866ff80dd6e4f1a4
     "passport": "^0.4.0",
     "react-router-dom": "^4.3.1",
     "request": "^2.88.0",
