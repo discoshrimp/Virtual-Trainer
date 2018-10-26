@@ -6,6 +6,8 @@ const path = require("path");
 
 router.get("/food", controllers.findAllFood);
 
+router.get('/dailyprogress', controllers.findDateFood)
+
 router.post("/food", controllers.createFood);
 
 router.delete("/food/:id", controllers.deleteFood);

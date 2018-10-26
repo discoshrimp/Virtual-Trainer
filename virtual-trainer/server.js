@@ -14,7 +14,9 @@ const morgan = require("morgan");
 mongoose.Promise = global.Promise;
 let MONGO_URL;
 const MONGO_LOCAL_URL = "mongodb://localhost:27017/virtual-trainer";
-
+mongoose.Promise = global.Promise
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useCreateIndex", true);
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI);
   MONGO_URL = process.env.MONGODB_URI;
@@ -60,6 +62,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session()); // Calls the deserializerUser
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

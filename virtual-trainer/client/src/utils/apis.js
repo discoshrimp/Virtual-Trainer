@@ -27,15 +27,15 @@ let apis = {
     return axios.post('/api/edamam', data)
   },
   getFood: () => {
-    return "testtertinfew";
+    return axios.post('/dailyprogress')
   },
   updateUser: function(id, userinfo) {
     console.log("saveuser: ", userinfo);
     return axios.post(`/api/updateuser/${id}`, userinfo);
   },
-  createUser: function(id, userinfo){
+  createUser: function(userinfo){
     console.log(`new user: ${userinfo}`)
-    return axios.post('/api/createuser')
+    return axios.post('/api/createuser', userinfo)
   },
   loadUserName: function() {
     return axios.get("/api/savedusers");
