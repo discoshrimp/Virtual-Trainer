@@ -1,18 +1,22 @@
-import React, { Component } from "react";
-import SignUp from "../src/components/sign-up";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import API from "./utils/apis"
-import "./App.css";
-import Articles from "./pages/Articles";
+import React, { Component } from 'react';
+import SignUp from './pages/SignUp/SignUp';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+// r
+import './App.css';
+import Articles from "./pages/Article/"
+import Edamam from './pages/Nutrition'
+
 
 class App extends Component {
+
   render() {
     return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/articles" component={Articles} />
-            <Route exact path="/" component={SignUp} />
+    <Router>
+	    <div >
+ 	      <Switch>
+          <Route exact path = '/' component={SignUp} />
+ 	        <Route exact path="/articles" component={Articles} />
+          <Route exact path ='/nutrition/' component = {Edamam} />
           </Switch>
         </div>
       </Router>

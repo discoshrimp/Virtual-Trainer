@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import API from "./../utils/apis";
+import API from "../../utils/apis";
 
-import Article from "./../components/Article"
-import Results from "./../components/Results";
+import Article from "../../components/Article"
+import Results from "../../components/Results";
 import moment from "moment";
 
 let data = {
