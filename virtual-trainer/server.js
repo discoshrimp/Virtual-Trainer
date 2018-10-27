@@ -4,13 +4,18 @@ const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
-const apiRoutes = require("./routes/apiRoutes");
-const passport = require("passport");
 const session = require("express-session");
+const passport = require("passport");
 const MongoStore = require("connect-mongo")(session);
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const apiRoutes = require("./routes/apiRoutes");
+const auth = require("./routes/auth");
 
 mongoose.Promise = global.Promise;
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useCreateIndex", true);
+
 let MONGO_URL;
 const MONGO_LOCAL_URL = "mongodb://localhost:27017/virtual-trainer";
 
@@ -22,7 +27,6 @@ if (process.env.MONGODB_URI) {
   MONGO_URL = MONGO_LOCAL_URL;
 }
 
-// should mongoose.connection be put in the call back of mongoose.connect???
 const db = mongoose.connection;
 db.on("error", err => {
   console.log(`There was an error connecting to the database: ${err}`);
@@ -32,18 +36,17 @@ db.once("open", () => {
     `You have successfully connected to your mongo database: ${MONGO_URL}`
   );
 });
+
 // Define middleware here
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-//routes required for authentication
-app.use("", apiRoutes);
 
 //Sessions
 app.use(
@@ -58,6 +61,10 @@ app.use(
 //Passport
 app.use(passport.initialize());
 app.use(passport.session()); // Calls the deserializerUser
+
+//routes
+app.use("", apiRoutes);
+app.use("/auth", auth);
 
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);

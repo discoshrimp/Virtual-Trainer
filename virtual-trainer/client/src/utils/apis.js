@@ -14,19 +14,16 @@ let apis = {
   getFood: () => {
     return "testtertinfew";
   },
-  updateUser: function(id, userinfo) {
+  getUser: () => {
+    return axios.get(`/auth/login`);
+  },
+  updateUser: userinfo => {
     console.log("saveuser: ", userinfo);
-    return axios.post(`/api/updateuser/${id}`, userinfo);
-  },
-  loadUserName: function() {
-    return axios.get("/api/savedusers");
-  },
-  loadUserNameById: function(id) {
-    return axios.get(`/api/savedusers/${id}`);
-  },
-  deleteUser: function(id) {
-    return axios.get(`/api/savedusers/${id}`);
+    return axios.post(`/signup/{userinfo.user}`, userinfo);
   }
+  // deleteUser: function(id) {
+  //   return axios.get(`/api/savedusers/${id}`);
+  // }
 };
 
 export default apis;
