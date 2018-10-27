@@ -18,6 +18,7 @@ router.delete("/food/:id", controllers.deleteFood);
 
 router.get("/users", controllers.findAllUsers);
 
+<<<<<<< HEAD
 router.get("/users/:id", controllers.findOneUser);
 
 <<<<<<< HEAD
@@ -30,6 +31,8 @@ router.post("/api/users", controllers.createUser);
 
 router.post("/signup", controllers.createUser);
 
+=======
+>>>>>>> adding login/userinfo page
 router.get("/articles", (req, res) => {
 <<<<<<< HEAD
 	const authKey = "462a94997e72401b92d8f11524378eba";
@@ -66,5 +69,25 @@ router.post("/edamam", (req, res) => {
   });
 });
 >>>>>>> adding the signup page
+
+//===========Authentication===========
+const loggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+};
+router.get("/login", (req, res) => {
+  res.redirect;
+});
+
+router.get("/home", loggedIn, (req, res, next) => {
+  res.send(req.session);
+});
+
+router.post("/signup", controllers.createUser);
+
+router.post("/signup/:user", controllers.updateUser);
 
 module.exports = router;

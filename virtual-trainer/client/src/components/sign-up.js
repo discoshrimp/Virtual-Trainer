@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 class Signup extends Component {
@@ -8,6 +9,7 @@ class Signup extends Component {
       username: "",
       password: "",
       confirmPassword: "",
+      redirectTo: null
     };
     //To keep the value of the input boxes to always be current with 'state'
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -29,11 +31,6 @@ class Signup extends Component {
       alert("Password do not match");
     } else if (this.state.username || this.state.password !== "") {
       //request to server code goes
-      let newUserToBeSaved = {
-        userName: this.state.username,
-        password: this.state.password
-      };
-      console.log("new User: ", newUserToBeSaved);
       axios
         .post("/signup", {
           userName: this.state.username,
@@ -43,12 +40,12 @@ class Signup extends Component {
           console.log("response: ", response);
           if (!response.data.error) {
             console.log("Username accepted!!");
+            alert(`Welcome ${response.data.userName} ! Redirecting to Login`);
             this.setState({
               redirectTo: "/login"
             });
           } else {
             alert("Username is taken");
-            // console.log("error: ", err);
             this.setState.username = "";
             this.setState.password = "";
             this.setState.confirmPassword = "";
@@ -62,6 +59,9 @@ class Signup extends Component {
     }
   };
   render() {
+    if (this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }} />;
+    }
     return (
       <div className="SignupForm">
         <h4>Sign Up</h4>
@@ -83,8 +83,6 @@ class Signup extends Component {
                 onChange={this.handleInputChange}
               />
             </div>
-            {/* </div> */}
-            {/* <div className="row form-group"> */}
             <div className="col-md-4 col-sm-12 col-xs-12">
               <label className="form-label" htmlFor="password">
                 Password

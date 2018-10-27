@@ -10,7 +10,8 @@ const userSchema = new Schema({
   userName: { type: String, required: true },
 >>>>>>> adding the signup page
   password: { type: String, required: true },
-  id: { type: String, required: false },
+  // firstName: { type: String, required: false },
+  // lastName: { type: String, required: false },
   age: { type: Number, required: false },
   sex: { type: String, required: false },
   weight: { type: Number, required: false },
