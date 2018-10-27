@@ -1,4 +1,6 @@
 const db = require("../Models");
+const date = new Date()
+
 
 module.exports = {
   findAllFood: (req, res) => {
@@ -11,7 +13,15 @@ module.exports = {
         res.json(err);
       });
   },
-
+findDateFood:(req, res) =>{
+db.food.find({_date: date })
+.then(data =>{
+res.json(data)
+})
+  .catch( err=>{
+    res.json(err)
+  })
+},
   findOneFood: (req, res) => {
     db.Food.findOne({ _id: req.params.id })
       .then(data => {
@@ -63,6 +73,7 @@ module.exports = {
       });
   },
   createUser: (req, res) => {
+    console.log(req.body)
     const { userName, password } = req.body;
     console.log("user to be saved: ", userName, password);
     //Adding th validation

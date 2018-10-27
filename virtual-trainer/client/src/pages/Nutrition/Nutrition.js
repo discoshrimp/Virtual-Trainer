@@ -38,19 +38,6 @@ class Nutrition extends Component {
 		console.log(this.state)
 		 API.NutritionBreakdown({title: this.state.RecipeTitle, 
 			ingr:this.state.ingredients})
-		// const app_key = '88aaf88bd591b1d07bffc2ee29030aa5'
-		// const app_id = 'e5ea3d28'
-		// const edamam = `http://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`
-		// axios.post({
-		// 	headers: 'Content-Type: application/json',
-		// 	url: edamam,
-		// 	body: {
-		// 		title: this.state.RecipeTitle,
-		// 		ingr: this.state.ingredients
-		// 	}
-		// }).then(data => {
-		// 	console.log(data)
-		// })
 	}
 
 	render() {

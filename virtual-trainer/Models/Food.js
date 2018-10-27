@@ -4,11 +4,18 @@ const Schema = mongoose.Schema;
 //define food schema
 const foodSchema = new Schema({
 	name: { type: String, required: true },
+	
 	calories: { type: Number, required: true },
+	
 	protein: Number,
+	
 	fat: Number,
+	
 	carbs: Number,
-    actualIntake: { type: Number, required: true }
+	
+	actualIntake: { type: Number, required: true },
+	
+	date:{type: Date, default: Date.now}
 
 });
 
