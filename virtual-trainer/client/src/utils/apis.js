@@ -1,33 +1,18 @@
 import axios from "axios";
 
 
+
 let apis = {
   weightLossArticles: topic => {
-    const authKey = "462a94997e72401b92d8f11524378eba";
-    const queryURL =
-      "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-      authKey +
-      "&q=" +
-      topic;
 
-    return axios.get('/articles',queryURL);
+    return axios.post('/articles',topic);
   },
   NutritionBreakdown: data =>{
-  //   const app_key = '88aaf88bd591b1d07bffc2ee29030aa5'
-	// 	const app_id = 'e5ea3d28'
-	// 	const edamam = `http://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`
-	// 	axios.post({
-	// 		headers: 'Content-Type: application/json',
-	// 		url: edamam,
-	// 		body: data.body
-	// 	}).then(data => {
-	// 		res.json(data)
-		// })
     console.log(data)
-    return axios.post('/api/edamam', data)
+    return axios.post('api/food', data)
   },
   getFood: () => {
-    return axios.post('/dailyprogress')
+    return axios.get('api/dailyprogress')
   },
   updateUser: function(id, userinfo) {
     console.log("saveuser: ", userinfo);

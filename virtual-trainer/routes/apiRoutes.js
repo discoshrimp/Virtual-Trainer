@@ -20,29 +20,36 @@ router.post("/createuser", controllers.createUser);
 
 router.post("/signup", controllers.createUser);
 
-router.get("/articles", (req, res) => {
+router.post("/articles", (req, res) => {
 	const authKey = "462a94997e72401b92d8f11524378eba";
-	const queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-		authKey + "&q=Weightloss";
-	request.get(queryURL, (error, response, data) => {
+	const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
+		${authKey}&${topic}`;
+	request.post(queryURL, (error, response, data) => {
 		res.send(JSON.parse(data).response.docs);
 	});
 })
 
-router.post("/edamam", (req, res) => {
-		console.log('request:', req.body)
-		const app_key = '88aaf88bd591b1d07bffc2ee29030aa5'
-		const app_id = 'e5ea3d28'
-		const edamam = `http://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`
-		request.post({
-			headers: 'Content-Type: application/json',
-			url: edamam,
-			body: req.body
-		},
-		(err, response, body) => {
-			console.log('response', body)
-			res.json(body)
-		})
-	})
+// router.post("/edamam", (req, res) => {
+// 		console.log('request:', req.body)
+	// 	const app_key = '88aaf88bd591b1d07bffc2ee29030aa5'
+	// 	const app_id = 'e5ea3d28'
+	// 	const edamam = `http://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`
+	// 	request.post({
+	// 		headers: 'Content-Type: application/json',
+	// 		url: edamam,
+	// 		body: req.body,
+	// 		json: true
+	// 	},
+	// 	(err, response, body) => {
+	// 		// console.log(`----\n(44) response: ${JSON.stringify(response)}\n----\nbody:${JSON.stringify(body)}\n----\nerr:${err}\n----`)
+	// 		const nutrition ={
+	// 		cals: body.totalNutrients.ENER_KCAL.quantity,
+	// 		fat: body.totalNutrients.FAT.quantity,
+	// 		carbs: body.totalNutrients.Carbs.quantity,
+	// 		protien: body.totalNutrients.PROCNT.quantity
+	// 		}
+	// 		res.json(nutrition)
+	// 	})
+	//  })
 
 module.exports = router;
