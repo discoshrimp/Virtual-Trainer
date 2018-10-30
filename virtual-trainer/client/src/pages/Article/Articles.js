@@ -3,6 +3,7 @@ import API from "../../utils/apis";
 
 import Article from "../../components/Article"
 import Results from "../../components/Results";
+import "./Articles.css";
 import moment from "moment";
 
 let data = {

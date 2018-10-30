@@ -4,7 +4,7 @@ import UserInfo from "../src/components/UserInfo";
 import Login from "../src/components/Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import Articles from "./pages/Articles";
+import Articles from "./pages/Article";
 
 class App extends Component {
 
