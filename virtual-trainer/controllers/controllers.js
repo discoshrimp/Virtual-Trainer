@@ -96,7 +96,7 @@ module.exports = {
       .catch(err => {
         res.json(err);
       });
-
+  },
   createUser: (req, res) => {
     const { userName, password } = req.body;
     console.log("user to be saved: ", userName, password);
@@ -116,7 +116,8 @@ module.exports = {
         });
     });
   },
-  updateUser: (req, res) => {
+ 
+ updateUser: (req, res) => {
     console.log("in controller: ", req.body);
     db.User.findOneAndUpdate(
       { userName: req.body.user },
@@ -136,15 +137,9 @@ module.exports = {
         res.send(result);
       }
     );
-  deleteUser: (req, res) => {
-    db.User.remove({ _id: req.params.id })
-      .then(data => {
-        res.json(data);
-      })
-      .catch(err => {
-        res.json(err);
-      });
   },
+
+
   findArticle: (req, res)=> {
     article.find().sort({_id:-1}).then( (data) => {
       res.json(data);
