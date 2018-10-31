@@ -14,7 +14,7 @@ let apis = {
   },
   NutritionBreakdown: data =>{
     console.log(data)
-    return axios.post('api/food', data)
+    return axios.post('api/newfood', data)
   },
   getFood: () => {
     return axios.get('api/dailyprogress')

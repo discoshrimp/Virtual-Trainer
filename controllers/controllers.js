@@ -1,5 +1,4 @@
 const db = require("../Models");
-const article = require("../models/Article");
 
 const request = require('request')
 const moment = require('moment')
@@ -20,11 +19,11 @@ module.exports = {
 
 
   findDateFood: (req, res) => {
-  const today = moment().startOf('day')
-  const tomorrow = moment(today).endOf('day')
-  console.log(`-----\ntoday:${today}\n-----\ntomorrow: ${tomorrow}\n-----`)
+    const today = moment().startOf('day')
+    const tomorrow = moment(today).endOf('day')
+    console.log(`-----\ntoday:${today}\n-----\ntomorrow: ${tomorrow}\n-----`)
 
-    db.Food.find({date: {$gt:today, $lt: tomorrow}})
+    db.Food.find({ date: { $gt: today, $lt: tomorrow } })
       .then(data => {
         console.log(`dbData: ${data}`)
         res.json(data)
@@ -62,14 +61,14 @@ module.exports = {
           protein: body.totalNutrients.PROCNT.quantity,
           fat: body.totalNutrients.FAT.quantity,
           carbs: body.totalNutrients.CHOCDF.quantity
-          
+
         }
         // console.log(nutrition)
         db.Food.create(nutrition)
           .then(data => {
             res.json(data);
           })
-          console.log(data)
+        console.log(data)
           .catch(err => {
             res.json(err);
           });
@@ -87,7 +86,7 @@ module.exports = {
         res.json(err);
       });
   },
-  
+
   findOneUser: (req, res) => {
     db.User.findOne()
       .then(data => {
@@ -116,8 +115,7 @@ module.exports = {
         });
     });
   },
- 
- updateUser: (req, res) => {
+  updateUser: (req, res) => {
     console.log("in controller: ", req.body);
     db.User.findOneAndUpdate(
       { userName: req.body.user },
@@ -137,33 +135,5 @@ module.exports = {
         res.send(result);
       }
     );
-  },
-
-
-  findArticle: (req, res)=> {
-    article.find().sort({_id:-1}).then( (data) => {
-      res.json(data);
-    }).catch((err) => {
-      res.json(err);
-    });
-  },
-
-  createArticle: (req, res) => {
-    article.create(req.body).then((data) => {
-      res.json(data);
-    }).catch((err) => {
-      res.json(err);
-    });
-  },
-
-  deleteArticle: (req, res) => {
-
-    article.remove({
-      _id: req.params.id
-    }).then((data)=> {
-      res.json(data);
-    }).catch((err) => {
-      res.json(err);
-    });
   }
-  }
+}
