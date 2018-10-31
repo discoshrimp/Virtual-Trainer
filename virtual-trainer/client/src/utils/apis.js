@@ -23,6 +23,17 @@ let apis = {
   updateUser: userinfo => {
     console.log("saveuser: ", userinfo);
     return axios.post(`/signup/{userinfo.user}`, userinfo);
+  deleteUser: function(id) {
+    return axios.get(`/api/savedusers/${id}`);
+  },
+  getArticles: ()=> {
+    return axios.get("/api/savearticles");
+  },
+  saveArticles:(article)=>{
+    return axios.post("/api/savearticles", article);
+  },
+  deleteArticles:(id)=>{
+    return axios.delete(`/api/savearticles/${id}`);
   }
   // deleteUser: function(id) {
   //   return axios.get(`/api/savedusers/${id}`);

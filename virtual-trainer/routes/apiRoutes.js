@@ -39,7 +39,11 @@ router.get("/home", loggedIn, (req, res, next) => {
 });
 
 router.post("/signup", controllers.createUser);
-
 router.post("/signup/:user", controllers.updateUser);
+
+router.get("/api/savearticles", controllers.findArticle);
+router.post("/api/savearticles", controllers.createArticle);
+router.delete("/api/savearticles/:id", controllers.deleteArticle);
+
 
 module.exports = router;

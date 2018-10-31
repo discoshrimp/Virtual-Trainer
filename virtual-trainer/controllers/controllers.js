@@ -1,4 +1,5 @@
 const db = require("../Models");
+const article = require("../models/Article");
 
 const request = require('request')
 const moment = require('moment')
@@ -135,5 +136,39 @@ module.exports = {
         res.send(result);
       }
     );
+  deleteUser: (req, res) => {
+    db.User.remove({ _id: req.params.id })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.json(err);
+      });
+  },
+  findArticle: (req, res)=> {
+    article.find().sort({_id:-1}).then( (data) => {
+      res.json(data);
+    }).catch((err) => {
+      res.json(err);
+    });
+  },
+
+  createArticle: (req, res) => {
+    article.create(req.body).then((data) => {
+      res.json(data);
+    }).catch((err) => {
+      res.json(err);
+    });
+  },
+
+  deleteArticle: (req, res) => {
+
+    article.remove({
+      _id: req.params.id
+    }).then((data)=> {
+      res.json(data);
+    }).catch((err) => {
+      res.json(err);
+    });
   }
   }
