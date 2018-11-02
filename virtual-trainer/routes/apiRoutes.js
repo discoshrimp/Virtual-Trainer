@@ -5,10 +5,6 @@ const request = require("request");
 const path = require("path");
 const db = require("../Models/User");
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 router.get("/food", controllers.findAllFood);
 
 router.get("/dailyprogress", controllers.findDateFood);
@@ -18,7 +14,6 @@ router.post("/food", controllers.createFood);
 router.delete("/food/:id", controllers.deleteFood);
 
 router.get("/articles", (req, res) => {
-<<<<<<< HEAD
   const authKey = "462a94997e72401b92d8f11524378eba";
   const queryURL =
     "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
@@ -46,15 +41,6 @@ router.post("/edamam", (req, res) => {
     }
   );
 });
-=======
-	const authKey = "462a94997e72401b92d8f11524378eba";
-	const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-		${authKey}&${topic}`;
-	request.post(queryURL, (error, response, data) => {
-		res.send(JSON.parse(data).response.docs);
-	});
-})
->>>>>>> origin/master
 
 //===========Authentication===========
 const loggedIn = (req, res, next) => {
@@ -76,14 +62,8 @@ router.get("/profile/:user", controllers.getProfile);
 
 router.post("/signup", controllers.createUser);
 router.post("/signup/:user", controllers.updateUser);
-
-<<<<<<< HEAD
-router.get("/signup/:username", controllers.deleteUser);
-=======
 router.get("/api/savearticles", controllers.findArticle);
 router.post("/api/savearticles", controllers.createArticle);
 router.delete("/api/savearticles/:id", controllers.deleteArticle);
-
->>>>>>> origin/master
 
 module.exports = router;
