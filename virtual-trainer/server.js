@@ -70,7 +70,7 @@ app.use(passport.session()); // Calls the deserializerUser
 
 //routes
 app.use("", apiRoutes);
-app.use("/auth", auth);y
+app.use("/auth", auth);
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build/index.html"));
