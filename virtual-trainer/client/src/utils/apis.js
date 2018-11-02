@@ -11,15 +11,36 @@ let apis = {
 
     return axios.get(queryURL);
   },
+  NutritionBreakdown: data => {
+    console.log(data);
+    return axios.post("api/food", data);
+  },
   getFood: () => {
-    return "testtertinfew";
+    return axios.get("api/dailyprogress");
+  },
+  getArticles: () => {
+    return axios.get("/api/savearticles");
+  },
+  saveArticles: article => {
+    return axios.post("/api/savearticles", article);
+  },
+  deleteArticles: id => {
+    return axios.delete(`/api/savearticles/${id}`);
   },
   getUser: () => {
     return axios.get(`/auth/login`);
   },
+  getProfile: user => {
+    console.log("profile to get: ", user);
+    return axios.get("/profile/user", user);
+  },
   updateUser: userinfo => {
     console.log("saveuser: ", userinfo);
     return axios.post(`/signup/{userinfo.user}`, userinfo);
+  },
+  getAccount: username => {
+    console.log("delete user: ", username);
+    return axios.get("/signup/username", username);
   }
   // deleteUser: function(id) {
   //   return axios.get(`/api/savedusers/${id}`);

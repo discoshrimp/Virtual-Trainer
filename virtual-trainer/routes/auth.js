@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("../passport");
+const User = require("../Models/User");
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
   console.log("in pass auth: ", req.user, req.session);
@@ -26,4 +27,5 @@ router.post("/logout", (req, res) => {
     return res.json({ msg: "No user to log out" });
   }
 });
+
 module.exports = router;

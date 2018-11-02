@@ -4,12 +4,9 @@ const bcrypt = require("bcryptjs");
 
 //define user schema
 const userSchema = new Schema({
-<<<<<<< HEAD
-  userName: {createIndex: true, type: String, required: true },
-=======
   userName: { type: String, required: true },
->>>>>>> adding the signup page
   password: { type: String, required: true },
+  googleId: String,
   // firstName: { type: String, required: false },
   // lastName: { type: String, required: false },
   age: { type: Number, required: false },

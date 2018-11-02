@@ -13,15 +13,21 @@ class Signup extends Component {
     };
     //To keep the value of the input boxes to always be current with 'state'
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleUserNameChange = this.handleUserNameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(
+      this
+    );
   }
 
-  handleInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState({
-      [name]: value
-    });
+  handleUserNameChange = event => {
+    this.setState({ username: event.target.value });
+  };
+  handlePasswordChange = event => {
+    this.setState({ password: event.target.value });
+  };
+  handleConfirmPasswordChange = event => {
+    this.setState({ confirmPassword: event.target.value });
   };
 
   handleFormSubmit = event => {
@@ -63,15 +69,10 @@ class Signup extends Component {
       return <Redirect to={{ pathname: this.state.redirectTo }} />;
     }
     return (
-      <div className="SignupForm">
+      <div className="container signupForm">
         <h4>Sign Up</h4>
-        <form className="form-horizontal">
+        <form className="form">
           <div className="form-group">
-            <div className="col-md-4 col-sm-12 col-xs-12">
-              <label className="form-label" htmlFor="username">
-                Username
-              </label>
-            </div>
             <div className="col-3 col-mr-auto">
               <input
                 className="form-input"
@@ -80,50 +81,40 @@ class Signup extends Component {
                 name="username"
                 placeholder="username"
                 value={this.state.username}
-                onChange={this.handleInputChange}
+                onChange={this.handleUserNameChange}
               />
-            </div>
-            <div className="col-md-4 col-sm-12 col-xs-12">
-              <label className="form-label" htmlFor="password">
-                Password
-              </label>
             </div>
             <div className="col-3 col-mr-auto">
               <input
                 className="form-input"
-                type="text"
+                type="password"
                 id="password"
                 name="password"
                 placeholder="password"
                 value={this.state.password}
-                onChange={this.handleInputChange}
+                onChange={this.handlePasswordChange}
               />
-            </div>
-            <div className="col-md-4 col-sm-12 col-xs-12">
-              <label className="form-label" htmlFor="confirmPassword">
-                Confirm Password
-              </label>
             </div>
             <div className="col-3 col-mr-auto">
               <input
                 className="form-input"
-                type="text"
+                type="password"
                 id="confirmPassword"
                 name="confirmPassword"
                 placeholder="confirm password"
                 value={this.state.confirmPassword}
-                onChange={this.handleInputChange}
+                onChange={this.handleConfirmPasswordChange}
               />
             </div>
           </div>
           <div className="form-group">
             <div className="col-7" />
             <button
-              className="btn btn-primary col-1 col-mr-auto"
+              className="btn btn-default col-2 col-mr-auto"
               onClick={this.handleFormSubmit}
               type="submit"
             >
-              Sign Up
+              Submit
             </button>
           </div>
         </form>

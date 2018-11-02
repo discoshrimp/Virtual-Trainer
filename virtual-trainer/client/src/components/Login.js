@@ -3,8 +3,8 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       userName: "",
       password: "",
@@ -12,20 +12,19 @@ class Login extends Component {
     };
     //To keep the value of the input boxes to always be current with 'state'
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleUserNameChange = this.handleUserNameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
-  handleInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState({
-      [name]: value
-    });
+  handleUserNameChange = event => {
+    this.setState({ userName: event.target.value });
+  };
+  handlePasswordChange = event => {
+    this.setState({ password: event.target.value });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    console.log("Login form: ", this.state.userName);
     if (this.state.userName && this.state.password !== "") {
       console.log("User to login: ", this.state.userName, this.state.password);
       axios
@@ -39,10 +38,8 @@ class Login extends Component {
           alert(
             `Welcome ${response.data.user.userName} ! Redirecting to Profile`
           );
-          console.log("id: ", response.data);
-          this.setState({
-            redirectTo: "/userinfo"
-          });
+          console.log("id: ", this.props.loggedIn);
+          this.setState({ redirectTo: "/Profile" });
         })
         .catch(err => {
           console.log("Login error: ", err);
@@ -55,57 +52,55 @@ class Login extends Component {
       alert("Pls provide with userName and password");
     }
   };
+
+  handleGoogleLogin = () => {
+    axios.post("/auth/google").then(response => {
+      console.log("response: ", response);
+      console.log("Profile clicked");
+    });
+  };
+
   render() {
     if (this.state.redirectTo) {
       return <Redirect to={{ pathname: this.state.redirectTo }} />;
     } else {
       return (
-        <div className="LoginForm">
+        <div className="container loginForm">
           <h4>Sign In</h4>
-          <div className="row" />
-          <form className="form-horizontal">
+          <form className="form">
             <div className="form-group">
-              <div className="col-md-4 col-sm-12 col-xs-12">
-                <label className="form-label" htmlFor="userName">
-                  UserName
-                </label>
-              </div>
               <div className="col-3 col-mr-auto">
                 <input
                   className="form-input"
                   type="text"
                   id="userName"
                   name="userName"
-                  placeholder="userName"
+                  placeholder="User Name"
                   value={this.state.userName}
-                  onChange={this.handleInputChange}
+                  onChange={this.handleUserNameChange}
                 />
               </div>
-              <div className="col-md-4 col-sm-12 col-xs-12">
-                <label className="form-label" htmlFor="password">
-                  Password
-                </label>
-              </div>
+
               <div className="col-3 col-mr-auto">
                 <input
                   className="form-input"
-                  type="text"
+                  type="password"
                   id="password"
                   name="password"
                   placeholder="password"
                   value={this.state.password}
-                  onChange={this.handleInputChange}
+                  onChange={this.handlePasswordChange}
                 />
               </div>
             </div>
             <div className="form-group">
               <div className="col-7" />
               <button
-                className="btn btn-primary col-1 col-mr-auto"
+                className="btn btn-default col-2 col-mr-auto"
                 onClick={this.handleFormSubmit}
                 type="submit"
               >
-                Sign In
+                Submit
               </button>
             </div>
           </form>

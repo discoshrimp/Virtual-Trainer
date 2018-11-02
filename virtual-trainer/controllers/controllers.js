@@ -1,16 +1,6 @@
 const db = require("../Models");
-<<<<<<< HEAD
-<<<<<<< HEAD
-const date = new Date()
-=======
-// const passport = require("passport");
-// const localStrategy = require("passport-local").Strategy;
->>>>>>> adding login/userinfo page
+const date = new Date();
 
-
-=======
-
->>>>>>> adding the signup page
 module.exports = {
   findAllFood: (req, res) => {
     db.Food.find()
@@ -22,19 +12,16 @@ module.exports = {
         res.json(err);
       });
   },
-<<<<<<< HEAD
-findDateFood:(req, res) =>{
-db.food.find({_date: date })
-.then(data =>{
-res.json(data)
-})
-  .catch( err=>{
-    res.json(err)
-  })
-},
-=======
-
->>>>>>> adding the signup page
+  findDateFood: (req, res) => {
+    db.food
+      .find({ _date: date })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.json(err);
+      });
+  },
   findOneFood: (req, res) => {
     db.Food.findOne({ _id: req.params.id })
       .then(data => {
@@ -67,16 +54,7 @@ res.json(data)
       });
   },
 
-  getSessionData: (req, res) => {
-    db.Users.findOne(_id);
-    console.log("session id: ", res._id);
-  },
-
   createUser: (req, res) => {
-<<<<<<< HEAD
-    console.log(req.body)
-=======
->>>>>>> adding the signup page
     const { userName, password } = req.body;
     console.log("user to be saved: ", userName, password);
     //Adding the validation
@@ -94,6 +72,16 @@ res.json(data)
           res.status(422).json(err);
         });
     });
+  },
+
+  getProfile: (req, res) => {
+    console.log("in controller for getting profile: ", req.user);
+    db.User.findOne({ userName: req.params.user })
+      .then(data => {
+        res.send("Hello from controller");
+        res.json(data);
+      })
+      .catch(err => res.status(422).json(err));
   },
 
   updateUser: (req, res) => {
@@ -120,6 +108,15 @@ res.json(data)
 
   logoutUser: (req, res) => {
     db.User.remove({ _id: req.params.id })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.json(err);
+      });
+  },
+  deleteUser: (req, res) => {
+    db.User.remove({ userName: req.params.username })
       .then(data => {
         res.json(data);
       })
