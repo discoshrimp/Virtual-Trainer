@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 let apis = {
   weightLossArticles: topic => {
     const authKey = "462a94997e72401b92d8f11524378eba";
@@ -11,6 +12,7 @@ let apis = {
 
     return axios.get(queryURL);
   },
+<<<<<<< HEAD
   NutritionBreakdown: data => {
     console.log(data);
     return axios.post("api/food", data);
@@ -26,6 +28,19 @@ let apis = {
   },
   deleteArticles: id => {
     return axios.delete(`/api/savearticles/${id}`);
+=======
+  NutritionBreakdown: data =>{
+    console.log(data)
+    return axios.post('api/food', data)
+  },
+  getFood: () => {
+    return axios.get('api/dailyprogress')
+  },
+  updateUser: function(id, userinfo) {
+    console.log("saveuser: ", userinfo);
+    return axios.post(`/api/updateuser/${id}`, userinfo);
+
+>>>>>>> origin/master
   },
   getUser: () => {
     return axios.get(`/auth/login`);
@@ -38,9 +53,23 @@ let apis = {
     console.log("saveuser: ", userinfo);
     return axios.post(`/signup/{userinfo.user}`, userinfo);
   },
+<<<<<<< HEAD
   getAccount: username => {
     console.log("delete user: ", username);
     return axios.get("/signup/username", username);
+=======
+  deleteUser: function(id) {
+    return axios.get(`/api/savedusers/${id}`);
+  },
+  getArticles: ()=> {
+    return axios.get("/api/savearticles");
+  },
+  saveArticles:(article)=>{
+    return axios.post("/api/savearticles", article);
+  },
+  deleteArticles:(id)=>{
+    return axios.delete(`/api/savearticles/${id}`);
+>>>>>>> origin/master
   }
   // deleteUser: function(id) {
   //   return axios.get(`/api/savedusers/${id}`);

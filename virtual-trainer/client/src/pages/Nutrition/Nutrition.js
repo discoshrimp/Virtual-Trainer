@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import API from '../../utils/apis'
-import axios from 'axios'
+
 
 
 class Nutrition extends Component {
@@ -12,6 +12,7 @@ class Nutrition extends Component {
 		ingredients: [],
 		RecipeTitle: "",
 	}
+	
 	state = {
 		calories: 0,
 		fat: 0,
@@ -20,24 +21,21 @@ class Nutrition extends Component {
 		ingredients: [],
 		RecipeTitle: "",
 	}
+
 	handleTitleInput = event => {
 		this.setState({ RecipeTitle: event.target.value })
 	}
 	handleIngInput = event => {
-		this.setState({ ingredients: event.target.value })
+		this.setState({ ingredients: event.target.value.split(',') })
 	}
-	// handleInputChange = (event) =>{
-	// 	const name = event.target.name
-	// 	const value = event.target.value
-	// 	this.setState({
-	// 		[name]: value
-	// 	})
-	// }
+
 	handleNutrition = (event) => {
-		// event.preventDefault()
+		event.preventDefault()
 		console.log(this.state)
 		 API.NutritionBreakdown({title: this.state.RecipeTitle, 
-			ingr:this.state.ingredients})
+			ingr:this.state.ingredients}).then(response =>{
+				console.log(`nutrients: ${JSON.stringify(response)}`)
+			})
 	}
 
 	render() {
