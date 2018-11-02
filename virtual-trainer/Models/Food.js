@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 //define food schema
 const foodSchema = new Schema({
-	name: { type: String, required: true },
+	name: { createIndex: true, type: String },
 	
-	calories: { type: Number, required: true },
+	calories: { type: Number },
 	
 	protein: Number,
 	
@@ -13,7 +13,7 @@ const foodSchema = new Schema({
 	
 	carbs: Number,
 	
-	actualIntake: { type: Number, required: true },
+	actualIntake: { type: Number },
 	
 	date:{type: Date, default: Date.now}
 

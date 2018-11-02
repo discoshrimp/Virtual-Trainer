@@ -9,7 +9,7 @@ router.get("/food", controllers.findAllFood);
 
 router.get("/dailyprogress", controllers.findDateFood);
 
-router.post("/food", controllers.createFood);
+router.post("/newfood", controllers.createFood);
 
 router.delete("/food/:id", controllers.deleteFood);
 
@@ -24,23 +24,7 @@ router.get("/articles", (req, res) => {
   });
 });
 
-router.post("/edamam", (req, res) => {
-  console.log("request:", req.body);
-  const app_key = "88aaf88bd591b1d07bffc2ee29030aa5";
-  const app_id = "e5ea3d28";
-  const edamam = `http://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`;
-  request.post(
-    {
-      headers: "Content-Type: application/json",
-      url: edamam,
-      body: req.body
-    },
-    (err, response, body) => {
-      console.log("response", body);
-      res.json(body);
-    }
-  );
-});
+
 
 //===========Authentication===========
 const loggedIn = (req, res, next) => {
@@ -64,6 +48,6 @@ router.post("/signup", controllers.createUser);
 
 router.post("/signup/:user", controllers.updateUser);
 
-router.get("/signup/:username", controllers.deleteUser);
+// router.get("/signup/:username", controllers.deleteUser);
 
 module.exports = router;

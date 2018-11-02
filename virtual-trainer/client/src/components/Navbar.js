@@ -4,7 +4,7 @@ import "../App.css";
 
 const Navbar = props => {
   const image = (
-    <span class="logo">
+    <span className="logo">
       <a href="https://docs.google.com/presentation/d/1cT0BN699ZWZx1rRhQvCp2tnBbJZj4h5aQ2yR1fM3cr0/edit#slide=id.g4572ee1381_0_42">
         <img
           src="https://res.cloudinary.com/djulaton/image/upload/v1541103948/vt-logo4.jpg"
@@ -31,6 +31,11 @@ const Navbar = props => {
             <li>
               <Link to="/articles" className="nav-link">
                 Articles
+              </Link>
+            </li>
+            <li>
+              <Link to="/nutrition" className="nav-link">
+                Nutritions
               </Link>
             </li>
             <li>

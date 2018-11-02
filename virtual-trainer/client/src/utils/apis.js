@@ -13,19 +13,19 @@ let apis = {
   },
   NutritionBreakdown: data => {
     console.log(data);
-    return axios.post("api/food", data);
+    return axios.post("/newfood", data);
   },
   getFood: () => {
-    return axios.get("api/dailyprogress");
+    return axios.get("/dailyprogress");
   },
   getArticles: () => {
-    return axios.get("/api/savearticles");
+    return axios.get("/savearticles");
   },
   saveArticles: article => {
-    return axios.post("/api/savearticles", article);
+    return axios.post("/savearticles", article);
   },
   deleteArticles: id => {
-    return axios.delete(`/api/savearticles/${id}`);
+    return axios.delete(`/savearticles/${id}`);
   },
   getUser: () => {
     return axios.get(`/auth/login`);
