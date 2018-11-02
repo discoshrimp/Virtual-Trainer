@@ -1,4 +1,4 @@
-const db = require("../Models");
+const db = require("../models");
 const article = require("../models/Article");
 
 const request = require('request')

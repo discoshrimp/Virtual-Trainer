@@ -13,14 +13,6 @@ router.post("/food", controllers.createFood);
 
 router.delete("/food/:id", controllers.deleteFood);
 
-router.get("/articles", (req, res) => {
-	const authKey = "462a94997e72401b92d8f11524378eba";
-	const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-		${authKey}&${topic}`;
-	request.post(queryURL, (error, response, data) => {
-		res.send(JSON.parse(data).response.docs);
-	});
-})
 
 //===========Authentication===========
 const loggedIn = (req, res, next) => {
