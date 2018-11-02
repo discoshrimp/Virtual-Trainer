@@ -1,14 +1,11 @@
 const db = require("../Models");
-<<<<<<< HEAD
 const date = new Date();
-=======
 const article = require("../models/Article");
 
 const request = require('request')
 const moment = require('moment')
 // const passport = require("passport");
 // const localStrategy = require("passport-local").Strategy;
->>>>>>> origin/master
 
 module.exports = {
   findAllFood: (req, res) => {
@@ -21,19 +18,6 @@ module.exports = {
         res.json(err);
       });
   },
-<<<<<<< HEAD
-  findDateFood: (req, res) => {
-    db.food
-      .find({ _date: date })
-      .then(data => {
-        res.json(data);
-      })
-      .catch(err => {
-        res.json(err);
-      });
-  },
-=======
-
 
   findDateFood: (req, res) => {
   const today = moment().startOf('day')
@@ -50,7 +34,6 @@ module.exports = {
       })
   },
 
->>>>>>> origin/master
   findOneFood: (req, res) => {
     db.Food.findOne({ _id: req.params.id })
       .then(data => {
@@ -104,10 +87,7 @@ module.exports = {
         res.json(err);
       });
   },
-<<<<<<< HEAD
 
-=======
-  
   findOneUser: (req, res) => {
     db.User.findOne()
       .then(data => {
@@ -117,7 +97,7 @@ module.exports = {
         res.json(err);
       });
   },
->>>>>>> origin/master
+
   createUser: (req, res) => {
     const { userName, password } = req.body;
     console.log("user to be saved: ", userName, password);
@@ -137,7 +117,6 @@ module.exports = {
         });
     });
   },
-<<<<<<< HEAD
 
   getProfile: (req, res) => {
     console.log("in controller for getting profile: ", req.user);
@@ -148,12 +127,8 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
-
-  updateUser: (req, res) => {
-=======
  
  updateUser: (req, res) => {
->>>>>>> origin/master
     console.log("in controller: ", req.body);
     db.User.findOneAndUpdate(
       { userName: req.body.user },
@@ -175,7 +150,6 @@ module.exports = {
     );
   },
 
-<<<<<<< HEAD
   logoutUser: (req, res) => {
     db.User.remove({ _id: req.params.id })
       .then(data => {
@@ -193,7 +167,6 @@ module.exports = {
       .catch(err => {
         res.json(err);
       });
-=======
 
   findArticle: (req, res)=> {
     article.find().sort({_id:-1}).then( (data) => {
@@ -220,6 +193,5 @@ module.exports = {
     }).catch((err) => {
       res.json(err);
     });
->>>>>>> origin/master
   }
   }
