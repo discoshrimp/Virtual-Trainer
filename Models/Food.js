@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+// const date = new Date()
+// const date = date.getDate()
+// const month =date.getMonth()
+// const year = date.getFullYear()
+// const useDate = `${month}/${date}/${year}`
 //define food schema
 const foodSchema = new Schema({
 	name: { createIndex: true, type: String },

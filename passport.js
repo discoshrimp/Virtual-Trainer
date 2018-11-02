@@ -1,6 +1,6 @@
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
-const User = require("./Models/User");
+const User = require("./models/User");
 
 passport.serializeUser((user, done) => {
   console.log("user in session: ", user);

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 let apis = {
   weightLossArticles: topic => {
     const authKey = "462a94997e72401b92d8f11524378eba";
@@ -11,6 +12,7 @@ let apis = {
 
     return axios.get(queryURL);
   },
+<<<<<<< HEAD:client/src/utils/apis.js
   NutritionBreakdown: data => {
     console.log(data);
     return axios.post("/newfood", data);
@@ -26,6 +28,19 @@ let apis = {
   },
   deleteArticles: id => {
     return axios.delete(`/savearticles/${id}`);
+=======
+  NutritionBreakdown: data =>{
+    console.log(data)
+    return axios.post('/food', data)
+  },
+  getFood: () => {
+    return axios.get('/dailyprogress')
+  },
+  updateUser: function(id, userinfo) {
+    console.log("saveuser: ", userinfo);
+    return axios.post(`/api/updateuser/${id}`, userinfo);
+
+>>>>>>> e789c728ba3dac32fc2c3e3c03a9e44da2fa2fe6:virtual-trainer/client/src/utils/apis.js
   },
   getUser: () => {
     return axios.get(`/auth/login`);
@@ -38,9 +53,23 @@ let apis = {
     console.log("saveuser: ", userinfo);
     return axios.post(`/signup/{userinfo.user}`, userinfo);
   },
+<<<<<<< HEAD:client/src/utils/apis.js
   getAccount: username => {
     console.log("delete user: ", username);
     return axios.get("/signup/username", username);
+=======
+  deleteUser: function(id) {
+    return axios.get(`/api/savedusers/${id}`);
+  },
+  getArticles: ()=> {
+    return axios.get("/api/savearticles");
+  },
+  saveArticles:(article)=>{
+    return axios.post("/api/savearticles", article);
+  },
+  deleteArticles:(id)=>{
+    return axios.delete(`/api/savearticles/${id}`);
+>>>>>>> e789c728ba3dac32fc2c3e3c03a9e44da2fa2fe6:virtual-trainer/client/src/utils/apis.js
   }
   // deleteUser: function(id) {
   //   return axios.get(`/api/savedusers/${id}`);
