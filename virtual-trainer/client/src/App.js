@@ -12,10 +12,6 @@ import Articles from "./pages/Article";
 // import SignupLogin from "../src/components/CSS/ReactTransitionGroup";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
-<<<<<<< HEAD
-=======
-import Articles from "./pages/Article";
->>>>>>> origin/master
 
 class App extends Component {
   constructor(props) {
