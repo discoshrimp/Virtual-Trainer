@@ -13,13 +13,14 @@ const cookieParser = require("cookie-parser");
 const apiRoutes = require("./routes/apiRoutes");
 const auth = require("./routes/auth");
 
+
 mongoose.Promise = global.Promise;
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useCreateIndex", true);
 
 let MONGO_URL;
 const MONGO_LOCAL_URL = "mongodb://localhost:27017/virtual-trainer";
-mongoose.Promise = global.Promise
+mongoose.Promise = global.Promise;
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useCreateIndex", true);
 if (process.env.MONGODB_URI) {
@@ -51,9 +52,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-//routes required for authentication
-app.use('/', apiRoutes);
-
 //Sessions
 app.use(
   session({
@@ -69,6 +67,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // Calls the deserializerUser
 
 //routes
+app.use("/", apiRoutes);
 app.use("", apiRoutes);
 app.use("/auth", auth);
 

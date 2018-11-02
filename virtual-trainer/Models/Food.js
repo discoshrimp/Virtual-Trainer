@@ -1,13 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-// const date = new Date()
-// const date = date.getDate()
-// const month =date.getMonth()
-// const year = date.getFullYear()
-// const useDate = `${month}/${date}/${year}`
+
 //define food schema
 const foodSchema = new Schema({
-	name: {createIndex: true, type: String, required: true },
+	name: { type: String, required: true },
 	
 	calories: { type: Number, required: true },
 	
@@ -17,7 +13,9 @@ const foodSchema = new Schema({
 	
 	carbs: Number,
 	
-	date:{ type: Date, default: Date.now}
+	actualIntake: { type: Number, required: true },
+	
+	date:{type: Date, default: Date.now}
 
 });
 

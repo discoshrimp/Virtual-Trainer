@@ -1,10 +1,5 @@
 const db = require("../Models");
-const article = require("../models/Article");
-
-const request = require('request')
-const moment = require('moment')
-// const passport = require("passport");
-// const localStrategy = require("passport-local").Strategy;
+const date = new Date();
 
 module.exports = {
   findAllFood: (req, res) => {
@@ -17,23 +12,16 @@ module.exports = {
         res.json(err);
       });
   },
-
-
   findDateFood: (req, res) => {
-  const today = moment().startOf('day')
-  const tomorrow = moment(today).endOf('day')
-  console.log(`-----\ntoday:${today}\n-----\ntomorrow: ${tomorrow}\n-----`)
-
-    db.Food.find({date: {$gt:today, $lt: tomorrow}})
+    db.food
+      .find({ _date: date })
       .then(data => {
-        console.log(`dbData: ${data}`)
-        res.json(data)
+        res.json(data);
       })
       .catch(err => {
-        res.json(err)
-      })
+        res.json(err);
+      });
   },
-
   findOneFood: (req, res) => {
     db.Food.findOne({ _id: req.params.id })
       .then(data => {
@@ -45,35 +33,13 @@ module.exports = {
   },
 
   createFood: (req, res) => {
-    const app_key = '88aaf88bd591b1d07bffc2ee29030aa5'
-    const app_id = 'e5ea3d28'
-    const edamam = `http://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`
-    request.post({
-      headers: 'Content-Type: application/json',
-      url: edamam,
-      body: req.body,
-      json: true
-    },
-      (err, response, body) => {
-        // console.log(`----\n(44) response: ${JSON.stringify(response)}\n----\nbody:${JSON.stringify(body)}\n----\nerr:${err}\n----`)
-        const nutrition = {
-          name: req.body.title,
-          calories: body.totalNutrients.ENERC_KCAL.quantity,
-          protein: body.totalNutrients.PROCNT.quantity,
-          fat: body.totalNutrients.FAT.quantity,
-          carbs: body.totalNutrients.CHOCDF.quantity
-          
-        }
-        // console.log(nutrition)
-        db.Food.create(nutrition)
-          .then(data => {
-            res.json(data);
-          })
-          console.log(data)
-          .catch(err => {
-            res.json(err);
-          });
+    db.Food.create(req.body)
+      .then(data => {
+        res.json(data);
       })
+      .catch(err => {
+        res.json(err);
+      });
   },
 
   deleteFood: (req, res) => {
@@ -87,16 +53,7 @@ module.exports = {
         res.json(err);
       });
   },
-  
-  findOneUser: (req, res) => {
-    db.User.findOne()
-      .then(data => {
-        res.json(data);
-      })
-      .catch(err => {
-        res.json(err);
-      });
-  },
+
   createUser: (req, res) => {
     const { userName, password } = req.body;
     console.log("user to be saved: ", userName, password);
@@ -116,8 +73,18 @@ module.exports = {
         });
     });
   },
- 
- updateUser: (req, res) => {
+
+  getProfile: (req, res) => {
+    console.log("in controller for getting profile: ", req.user);
+    db.User.findOne({ userName: req.params.user })
+      .then(data => {
+        res.send("Hello from controller");
+        res.json(data);
+      })
+      .catch(err => res.status(422).json(err));
+  },
+
+  updateUser: (req, res) => {
     console.log("in controller: ", req.body);
     db.User.findOneAndUpdate(
       { userName: req.body.user },
@@ -139,31 +106,22 @@ module.exports = {
     );
   },
 
-
-  findArticle: (req, res)=> {
-    article.find().sort({_id:-1}).then( (data) => {
-      res.json(data);
-    }).catch((err) => {
-      res.json(err);
-    });
+  logoutUser: (req, res) => {
+    db.User.remove({ _id: req.params.id })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.json(err);
+      });
   },
-
-  createArticle: (req, res) => {
-    article.create(req.body).then((data) => {
-      res.json(data);
-    }).catch((err) => {
-      res.json(err);
-    });
-  },
-
-  deleteArticle: (req, res) => {
-
-    article.remove({
-      _id: req.params.id
-    }).then((data)=> {
-      res.json(data);
-    }).catch((err) => {
-      res.json(err);
-    });
+  deleteUser: (req, res) => {
+    db.User.remove({ userName: req.params.username })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.json(err);
+      });
   }
-  }
+};

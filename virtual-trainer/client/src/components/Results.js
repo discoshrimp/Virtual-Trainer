@@ -11,7 +11,6 @@ const Results = props => (
           <a href={props.url} rel="noopener noreferrer" target="_blank">
             <button className="btn btn-default ">View Article</button>
           </a>
-          <button className="btn btn-primary" onClick={() => props.handleSaveButton(props._id)}>Save</button>
         </span>
       </h4>
     </li>

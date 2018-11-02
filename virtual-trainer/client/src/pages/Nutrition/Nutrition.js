@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import API from '../../utils/apis'
-import { Redirect } from "react-router-dom"
+import axios from 'axios'
 
 
 class Nutrition extends Component {
@@ -12,7 +12,6 @@ class Nutrition extends Component {
 		ingredients: [],
 		RecipeTitle: "",
 	}
-	
 	state = {
 		calories: 0,
 		fat: 0,
@@ -21,30 +20,27 @@ class Nutrition extends Component {
 		ingredients: [],
 		RecipeTitle: "",
 	}
-
 	handleTitleInput = event => {
 		this.setState({ RecipeTitle: event.target.value })
 	}
 	handleIngInput = event => {
-		this.setState({ ingredients: event.target.value.split(',') })
+		this.setState({ ingredients: event.target.value })
 	}
-
+	// handleInputChange = (event) =>{
+	// 	const name = event.target.name
+	// 	const value = event.target.value
+	// 	this.setState({
+	// 		[name]: value
+	// 	})
+	// }
 	handleNutrition = (event) => {
-		event.preventDefault()
+		// event.preventDefault()
 		console.log(this.state)
 		 API.NutritionBreakdown({title: this.state.RecipeTitle, 
-			ingr:this.state.ingredients}).then(response =>{
-				console.log(`nutrients: ${JSON.stringify(response)}`)
-			})
+			ingr:this.state.ingredients})
 	}
-handleRedirect = event=>{
-	console.log(`dashboard clicked`)
-	this.setState({redirectTo: '/dashboard'})
-}
+
 	render() {
-		if (this.state.redirectTo) {
-			return <Redirect to={{ pathname: this.state.redirectTo }} />;
-		}
 		return (
 			<form>
 				<div className='form-group'>
@@ -55,8 +51,7 @@ handleRedirect = event=>{
 					<label htmlFor='ingredients'>Ingredients</label>
 					<input type='text' className='form-control' id='ingredients' value={this.state.ingredients} onChange={this.handleIngInput}></input>
 				</div>
-				<button className='btn btn-large' onClick={this.handleNutrition}>Submit</button>
-				<button className='btn btn-large' onClick={this.handleRedirect}>Dashboard</button>
+				<button className='btn btn-primary btn-large' onClick={this.handleNutrition}>Submit</button>
 			</form>
 		)
 	}

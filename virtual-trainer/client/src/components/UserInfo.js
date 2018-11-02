@@ -110,32 +110,20 @@ class UserInfo extends Component {
       return <Redirect to={{ pathname: this.state.redirectTo }} />;
     }
     return (
-      <div className="SignupForm">
+      <div className="userInfoForm ">
         <h4>User Information</h4>
         <form className="form-horizontal">
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="age">
-                Age
-              </label>
-            </div>
+          <div className="form-group row">
             <div className="col-3 col-mr-auto">
               <input
                 className="form-input"
                 type="text"
                 id="age"
                 name="age"
-                placeholder="age"
+                placeholder="Age"
                 value={this.state.age}
                 onChange={this.handleAgeChange}
               />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="gender">
-                Gender
-              </label>
             </div>
             <div className="col-3 col-mr-auto">
               <input
@@ -143,35 +131,23 @@ class UserInfo extends Component {
                 type="text"
                 id="gender"
                 name="gender"
-                placeholder="gender"
+                placeholder="Gender"
                 value={this.state.gender}
                 onChange={this.handleGenderChange}
               />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="weight">
-                Weight
-              </label>
-            </div>
+          <div className="form-group row">
             <div className="col-3 col-mr-auto">
               <input
                 className="form-input"
                 type="text"
                 id="weight"
                 name="weight"
-                placeholder="weight(lb)"
+                placeholder="Weight(lb)"
                 value={this.state.weight}
                 onChange={this.handleWeightChange}
               />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="height">
-                Height
-              </label>
             </div>
             <div className="col-3 col-mr-auto">
               <input
@@ -179,70 +155,41 @@ class UserInfo extends Component {
                 type="text"
                 id="height"
                 name="height"
-                placeholder="height(in feet)"
+                placeholder="Height(in feet)"
                 value={this.state.height}
                 onChange={this.handleHeightChange}
               />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="phonenumber">
-                Phone number
-              </label>
-            </div>
+          <div className="form-group row">
             <div className="col-3 col-mr-auto">
               <input
                 className="form-input"
                 type="text"
                 id="phonenumber"
                 name="phonenumber"
-                placeholder="phone number"
+                placeholder="Phone number"
                 value={this.state.phoneNumber}
                 onChange={this.handlePhoneNumberChange}
               />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="goal">
-                Goal
-              </label>
-            </div>
+          <div className="form-group row">
             <div className="col-3 col-mr-auto">
               <textarea
                 className="form-input"
                 type="text"
                 id="goal"
                 name="goal"
-                placeholder="goal"
+                placeholder="Goal"
                 value={this.state.goal}
                 onChange={this.handleGoalChange}
               />
             </div>
           </div>
           <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="recommendedIntake">
-                Recommended Intake
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <textarea
-                className="form-input"
-                type="text"
-                id="recommendedIntake"
-                name="recommendedIntake"
-                placeholder="recommended intake"
-                value={this.state.recommendedIntake}
-                onChange={this.handleRecommendedIntakeChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-7" />
             <button
-              className="btn btn-primary col-1 col-mr-auto"
+              className="btn btn-default col-2 col-mr-auto"
               onClick={this.handleFormSubmit}
               type="submit"
             >
