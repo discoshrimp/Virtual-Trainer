@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import API from '../../utils/apis'
 
+import { Redirect } from "react-router-dom"
 
 class Dashboard extends Component {
 
@@ -39,17 +40,20 @@ class Dashboard extends Component {
 				console.log(`initialState after setting to state and clearing: ${JSON.stringify(this.initialState)}\n--------\nstate: ${JSON.stringify(this.state)}`)
 			})
 	}
+	handleClick = event=>{
+		console.log('button clicked')
+		this.setState({redirectTo: '/nutrition'})
+	}
 	render() {
+		if (this.state.redirectTo) {
+			return <Redirect to={{ pathname: this.state.redirectTo }} />;
+		}
 		return (
 			<div className='container'>
 				<div className='row'>
 					<div className='col-m'>
-						<p>this is where calories bar will go</p>
+						<p>Calories Consumed Today: {this.state.calories}</p>
 						{/* this is where the calorie counter guage will go */}
-					</div>
-					<div className='col-m'>
-						{this.state.calories} <p>this is where calorie number will go</p>
-						{/* this is where the number of calories will go, also could be floated on top of the progress bar */}
 					</div>
 				</div>
 				<div className='row'>
@@ -57,21 +61,24 @@ class Dashboard extends Component {
 						<div className='card-body'>
 							<ul className='list-group list-group-flush'>
 								<li className='list-group-item' id='carbs'>
-									<p>this is carbs</p>
+									<p>Total Carbohydrates</p>
 									{/* this is where carb will go */}
 									{this.state.carbs}
 								</li>
 								<li className='list-group-item' id='protein'>
-									<p>this is protein</p>
+									<p>Total Protein</p>
 									{/* load protein data db */this.state.protein}
 								</li>
 								<li className='list-group-item' id='fat'>
-									<p>this is fat</p>
+									<p>Total Fat</p>
 									{/* load fat data from db */}
 									{this.state.fat}
 								</li>
 							</ul>
 						</div>
+					</div>
+					<div className ='col'>
+					<button className ='btn btn-large' to='/nutrition' onClick = {this.handleClick}>Nutrition</button>
 					</div>
 				</div>
 			</div>

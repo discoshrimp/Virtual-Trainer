@@ -14,10 +14,10 @@ let apis = {
   },
   NutritionBreakdown: data =>{
     console.log(data)
-    return axios.post('api/food', data)
+    return axios.post('/food', data)
   },
   getFood: () => {
-    return axios.get('api/dailyprogress')
+    return axios.get('/dailyprogress')
   },
   updateUser: function(id, userinfo) {
     console.log("saveuser: ", userinfo);
