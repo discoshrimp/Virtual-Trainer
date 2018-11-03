@@ -5,14 +5,10 @@ import SignUp from "../src/components/sign-up";
 import UserInfo from "../src/components/UserInfo";
 import Login from "../src/components/Login";
 import Profile from "../src/components/Profile";
-import Header from "../src/components/Header";
 import Navbar from "../src/components/Navbar";
 import Home from "../src/components/Home";
 import Articles from "./pages/Article";
-import Dashboard from "./pages/Dashboard";
-import Nutrition from "./pages/Nutrition"
-
-// import SignupLogin from "../src/components/CSS/ReactTransitionGroup";
+import Nutrition from "./pages/Nutrition";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 
@@ -25,7 +21,6 @@ class App extends Component {
       user: null
     };
     this.logout = this.logout.bind(this);
-    // this.login = this.login.bind(this);
   }
 
   componentDidUpdate(user) {
@@ -103,9 +98,6 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
-          {/* <div className="container-fluid">
-            <Header user={this.state.user} />
-          </div> */}
           <Navbar loggedIn={this.state.loggedIn} logout={this.logout} />
           <Switch>
             <Route
@@ -116,7 +108,6 @@ class App extends Component {
             <Route exact path="/Profile" component={Profile} />
             <Route exact path="/UserInfo" component={UserInfo} />
             <Route exact path="/articles" component={Articles} />
-            <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/nutrition" component={Nutrition} />
             <Route
               exact
