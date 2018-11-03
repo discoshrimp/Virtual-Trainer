@@ -3,7 +3,7 @@ import ProfileResult from "../pages/ProfileResult";
 import Profile from "../pages/Profile";
 import API from "../utils/apis";
 import axios from "axios";
-
+import { Redirect } from "react-router-dom";
 class Profiles extends Component {
   constructor() {
     super();
@@ -27,14 +27,15 @@ class Profiles extends Component {
   getProfileDetail = () => {
     const User = this.state.user;
     console.log("profile user: ", User);
-    axios.get("/api/signup", { user: this.state.user }).then(response => {
-      console.log("Profile API: ", response);
-      if (response) {
-        this.setState({ profiles: response.data });
-        console.log("profile detail: ", this.state.profiles);
-        this.renderProfile();
-      }
-    });
+    this.getProfile();
+    // axios.get("/api/signup", { user: this.state.user }).then(response => {
+    //   console.log("Profile API: ", response);
+    //   if (response) {
+    //     this.setState({ profiles: response.data });
+    //     console.log("profile detail: ", this.state.profiles);
+    //     this.renderProfile();
+    //   }
+    // });
   };
 
   goToUserInfo = event => {
@@ -42,6 +43,13 @@ class Profiles extends Component {
     let path = `/UserInfo`;
     this.props.history.push(path);
   };
+
+  getProfile = () => {
+    let username = this.state.user;
+    API.getProfile(username).then(data=>{
+      this.setState({profiles :data.data});
+    });
+  } 
 
   renderProfile = () => {
     console.log("this.state.profiles", this.state.profiles);
@@ -58,6 +66,7 @@ class Profiles extends Component {
   };
 
   render() {
+
     return (
       <div className="container">
         <div className="row">
