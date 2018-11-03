@@ -8,10 +8,11 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   color: #3e363f;
   font-family: "Roboto Condensed", sans-serif;
   height: 100vh;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .nav-wrapper {

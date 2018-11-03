@@ -1,5 +1,5 @@
 const db = require("../Models");
-// const article = require("./models/Article");
+const article = require("../Models/Article");
 
 const request = require('request')
 const moment = require('moment')
@@ -121,7 +121,7 @@ module.exports = {
     console.log("in controller for getting profile: ", req.user);
     db.User.findOne({ userName: req.params.user })
       .then(data => {
-        res.send("Hello from controller");
+        // res.send("Hello from controller");
         res.json(data);
       })
       .catch(err => res.status(422).json(err));
@@ -151,7 +151,7 @@ module.exports = {
 
 
   findArticle: (req, res)=> {
-    db.article.find().sort({_id:-1}).then( (data) => {
+    article.find().sort({_id:-1}).then( (data) => {
       res.json(data);
     }).catch((err) => {
       res.json(err);
@@ -159,7 +159,7 @@ module.exports = {
   },
 
   createArticle: (req, res) => {
-    db.article.create(req.body).then((data) => {
+    article.create(req.body).then((data) => {
       res.json(data);
     }).catch((err) => {
       res.json(err);
@@ -168,7 +168,7 @@ module.exports = {
 
   deleteArticle: (req, res) => {
 
-    db.article.remove({
+    article.remove({
       _id: req.params.id
     }).then((data)=> {
       res.json(data);
@@ -176,4 +176,4 @@ module.exports = {
       res.json(err);
     });
   }
-  }
+};

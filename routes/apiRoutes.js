@@ -49,5 +49,21 @@ router.post("/signup", controllers.createUser);
 router.post("/signup/:user", controllers.updateUser);
 
 // router.get("/signup/:username", controllers.deleteUser);
+router.get("/api/savearticles", controllers.findArticle);
+
+router.post("/api/savearticles", controllers.createArticle);
+
+router.delete("/api/savearticles/:id", controllers.deleteArticle);
+router.get("/api/food", controllers.findAllFood);
+
+router.post("/api/food", controllers.createFood);
+
+router.delete("/api/food/:id", controllers.deleteFood);
+
+router.get("/api/users/:id", controllers.findOneUser);
+
+router.post("/api/users", controllers.createUser);
+
+router.post("/signup", controllers.createUser);
 
 module.exports = router;

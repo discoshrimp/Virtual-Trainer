@@ -19,20 +19,20 @@ let apis = {
     return axios.get("/dailyprogress");
   },
   getArticles: () => {
-    return axios.get("/savearticles");
+    return axios.get("/api/savearticles");
   },
   saveArticles: article => {
-    return axios.post("/savearticles", article);
+    return axios.post("/api/savearticles", article);
   },
   deleteArticles: id => {
-    return axios.delete(`/savearticles/${id}`);
+    return axios.delete(`/api/savearticles/${id}`);
   },
   getUser: () => {
     return axios.get(`/auth/login`);
   },
   getProfile: user => {
     console.log("profile to get: ", user);
-    return axios.get("/profile/user", user);
+    return axios.get("/profile/"+ user);
   },
   updateUser: userinfo => {
     console.log("saveuser: ", userinfo);
