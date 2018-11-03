@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import ProfileResult from "../pages/ProfileResult";
 import Profile from "../pages/Profile";
 import API from "../utils/apis";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
 class Profiles extends Component {
   constructor() {
     super();
     this.state = {
       user: "",
-      profiles: {}
+      profiles: {},
+      bmr: 0
     };
   }
   componentDidMount() {
@@ -28,14 +27,6 @@ class Profiles extends Component {
     const User = this.state.user;
     console.log("profile user: ", User);
     this.getProfile();
-    // axios.get("/api/signup", { user: this.state.user }).then(response => {
-    //   console.log("Profile API: ", response);
-    //   if (response) {
-    //     this.setState({ profiles: response.data });
-    //     console.log("profile detail: ", this.state.profiles);
-    //     this.renderProfile();
-    //   }
-    // });
   };
 
   goToUserInfo = event => {
@@ -46,27 +37,29 @@ class Profiles extends Component {
 
   getProfile = () => {
     let username = this.state.user;
-    API.getProfile(username).then(data=>{
-      this.setState({profiles :data.data});
+    API.getProfile(username).then(data => {
+      console.log("Profile data: ", data.data);
+      this.setState({ profiles: data.data });
     });
-  } 
+  };
 
   renderProfile = () => {
     console.log("this.state.profiles", this.state.profiles);
+    console.log("this.state.profiles", this.state.profiles.userName);
     return (
       <ProfileResult
         key={this.state.profiles._id}
+        user={this.state.profiles.userName}
         age={this.state.profiles.age}
         height={this.state.profiles.height}
         weight={this.state.profiles.weight}
         goal={this.state.profiles.goal}
-        recommendedIntake={this.state.profiles.recommendedIntake}
+        recommendedIntake={this.state.recommendedIntake}
       />
     );
   };
 
   render() {
-
     return (
       <div className="container">
         <div className="row">

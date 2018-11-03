@@ -95,7 +95,11 @@ h4 {
 }
 
 .calorieDisplay {
+  margin: 5px;
+  padding: 5px;
+  width: 300px;
   font-size: 20px;
+  background-color: rgba(5, 219, 159, 0.6);
   color: red;
   font-weight: 700;
 }
