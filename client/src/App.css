@@ -40,6 +40,16 @@ body {
   color: red;
 }
 
+.quotes {
+  margin-top: 200px;
+  font-family: "Pacifico", cursive;
+  font-weight: 900;
+  background-color: rgba(5, 219, 159, 0.1);
+  color: red;
+  line-height: 1.5em;
+  letter-spacing: 0.4em;
+}
+
 .userInfoForm,
 .loginForm,
 .signupForm,
