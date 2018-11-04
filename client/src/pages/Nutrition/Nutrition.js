@@ -38,6 +38,7 @@ class Nutrition extends Component {
     }).then(response => {
       console.log(`nutrients: ${JSON.stringify(response)}`);
     });
+    window.location.reload();
   };
   handleRedirect = event => {
     console.log(`dashboard clicked`);
