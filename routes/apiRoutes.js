@@ -24,8 +24,6 @@ router.get("/articles", (req, res) => {
   });
 });
 
-
-
 //===========Authentication===========
 const loggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -38,17 +36,14 @@ router.get("/login", (req, res) => {
   res.redirect;
 });
 
-// router.get("/home", loggedIn, (req, res, next) => {
-//   res.send(req.session);
-// });
-
 router.get("/profile/:user", controllers.getProfile);
 
 router.post("/signup", controllers.createUser);
 
 router.post("/signup/:user", controllers.updateUser);
 
-// router.get("/signup/:username", controllers.deleteUser);
+//router.delete("/signup/:username", controllers.deleteUser);
+
 router.get("/api/savearticles", controllers.findArticle);
 
 router.post("/api/savearticles", controllers.createArticle);
@@ -63,7 +58,5 @@ router.delete("/api/food/:id", controllers.deleteFood);
 router.get("/api/users/:id", controllers.findOneUser);
 
 router.post("/api/users", controllers.createUser);
-
-router.post("/signup", controllers.createUser);
 
 module.exports = router;

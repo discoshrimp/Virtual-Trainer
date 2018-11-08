@@ -1,10 +1,8 @@
 const db = require("../Models");
 const article = require("../Models/Article");
 
-const request = require('request')
-const moment = require('moment')
-// const passport = require("passport");
-// const localStrategy = require("passport-local").Strategy;
+const request = require("request");
+const moment = require("moment");
 
 module.exports = {
   findAllFood: (req, res) => {
@@ -18,20 +16,19 @@ module.exports = {
       });
   },
 
-
   findDateFood: (req, res) => {
-  const today = moment().startOf('day')
-  const tomorrow = moment(today).endOf('day')
-  console.log(`-----\ntoday:${today}\n-----\ntomorrow: ${tomorrow}\n-----`)
+    const today = moment().startOf("day");
+    const tomorrow = moment(today).endOf("day");
+    console.log(`-----\ntoday:${today}\n-----\ntomorrow: ${tomorrow}\n-----`);
 
-    db.Food.find({date: {$gt:today, $lt: tomorrow}})
+    db.Food.find({ date: { $gt: today, $lt: tomorrow } })
       .then(data => {
-        console.log(`dbData: ${data}`)
-        res.json(data)
+        console.log(`dbData: ${data}`);
+        res.json(data);
       })
       .catch(err => {
-        res.json(err)
-      })
+        res.json(err);
+      });
   },
 
   findOneFood: (req, res) => {
@@ -45,35 +42,43 @@ module.exports = {
   },
 
   createFood: (req, res) => {
-    const app_key = '88aaf88bd591b1d07bffc2ee29030aa5'
-    const app_id = 'e5ea3d28'
-    const edamam = `http://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`
-    request.post({
-      headers: 'Content-Type: application/json',
-      url: edamam,
-      body: req.body,
-      json: true
-    },
+    console.log("nutriton data passed: ", req.body);
+    const app_key = "88aaf88bd591b1d07bffc2ee29030aa5";
+    const app_id = "e5ea3d28";
+    const edamam = `http://api.edamam.com/api/nutrition-details?app_id=${app_id}&app_key=${app_key}`;
+    request.post(
+      {
+        headers: "Content-Type: application/json",
+        url: edamam,
+        body: req.body,
+        json: true
+      },
       (err, response, body) => {
-        console.log(`----\n(44) response: ${JSON.stringify(response)}\n----\nbody:${JSON.stringify(body)}\n----\nerr:${err}\n----`)
+        console.log("Protein: ", body.totalNutrients);
+        console.log(
+          `----\n(44) response: ${JSON.stringify(
+            response
+          )}\n----\nbody:${JSON.stringify(body)}\n----\nerr:${err}\n----`
+        );
         const nutrition = {
+          user: req.body.user,
           name: req.body.title,
           calories: body.totalNutrients.ENERC_KCAL.quantity,
           protein: body.totalNutrients.PROCNT.quantity,
           fat: body.totalNutrients.FAT.quantity,
           carbs: body.totalNutrients.CHOCDF.quantity
-          
-        }
-        // console.log(nutrition)
+        };
+        console.log(nutrition);
         db.Food.create(nutrition)
           .then(data => {
             res.json(data);
-            console.log(data)
+            console.log(data);
           })
           .catch(err => {
             res.json(err);
           });
-      })
+      }
+    );
   },
 
   deleteFood: (req, res) => {
@@ -87,7 +92,7 @@ module.exports = {
         res.json(err);
       });
   },
-  
+
   findOneUser: (req, res) => {
     db.User.findOne()
       .then(data => {
@@ -121,13 +126,13 @@ module.exports = {
     console.log("in controller for getting profile: ", req.user);
     db.User.findOne({ userName: req.params.user })
       .then(data => {
-        // res.send("Hello from controller");
+        console.log("profile from db: ", data);
         res.json(data);
       })
       .catch(err => res.status(422).json(err));
   },
- 
- updateUser: (req, res) => {
+
+  updateUser: (req, res) => {
     console.log("in controller: ", req.body);
     db.User.findOneAndUpdate(
       { userName: req.body.user },
@@ -149,31 +154,39 @@ module.exports = {
     );
   },
 
-
-  findArticle: (req, res)=> {
-    article.find().sort({_id:-1}).then( (data) => {
-      res.json(data);
-    }).catch((err) => {
-      res.json(err);
-    });
+  findArticle: (req, res) => {
+    article
+      .find()
+      .sort({ _id: -1 })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.json(err);
+      });
   },
 
   createArticle: (req, res) => {
-    article.create(req.body).then((data) => {
-      res.json(data);
-    }).catch((err) => {
-      res.json(err);
-    });
+    article
+      .create(req.body)
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.json(err);
+      });
   },
 
   deleteArticle: (req, res) => {
-
-    article.remove({
-      _id: req.params.id
-    }).then((data)=> {
-      res.json(data);
-    }).catch((err) => {
-      res.json(err);
-    });
+    article
+      .remove({
+        _id: req.params.id
+      })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.json(err);
+      });
   }
 };
