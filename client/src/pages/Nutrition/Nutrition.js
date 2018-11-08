@@ -1,26 +1,21 @@
 import React, { Component } from "react";
 import API from "../../utils/apis";
-import { Redirect } from "react-router-dom";
-import Dashboard from "../Dashboard";
 
 class Nutrition extends Component {
-  initialState = {
+  state = {
+    user: "",
     calories: 0,
     fat: 0,
     carbs: 0,
     protein: 0,
     ingredients: [],
-    RecipeTitle: ""
+    RecipeTitle: "",
+    MenuNutrient: {}
   };
 
-  state = {
-    calories: 0,
-    fat: 0,
-    carbs: 0,
-    protein: 0,
-    ingredients: [],
-    RecipeTitle: ""
-  };
+  componentDidMount() {
+    this.getSessionData();
+  }
 
   handleTitleInput = event => {
     this.setState({ RecipeTitle: event.target.value });
@@ -29,25 +24,30 @@ class Nutrition extends Component {
     this.setState({ ingredients: event.target.value.split(",") });
   };
 
+  getSessionData = username => {
+    console.log("user passed in nutrition: ", username);
+    API.getUser(username).then(response => {
+      this.setState({ user: response.data.user });
+    });
+    console.log("user in nutrition: ", this.response);
+  };
+
   handleNutrition = event => {
     event.preventDefault();
     console.log(this.state);
-    API.NutritionBreakdown({
+    let nutritionToBeSaved = {
+      user: this.state.user,
       title: this.state.RecipeTitle,
       ingr: this.state.ingredients
-    }).then(response => {
-      console.log(`nutrients: ${JSON.stringify(response)}`);
+    };
+    console.log("New nutrition: ", nutritionToBeSaved);
+    API.NutritionBreakdown(nutritionToBeSaved).then(response => {
+      console.log("nutrition breakdown: ", response.data);
+      this.setState({ MenuNutrient: response.data });
     });
-    window.location.reload();
   };
-  handleRedirect = event => {
-    console.log(`dashboard clicked`);
-    this.setState({ redirectTo: "/dashboard" });
-  };
+
   render() {
-    if (this.state.redirectTo) {
-      return <Redirect to={{ pathname: this.state.redirectTo }} />;
-    }
     return (
       <div className="container nutritionForm">
         <form>
@@ -75,7 +75,35 @@ class Nutrition extends Component {
             Submit
           </button>
         </form>
-        <Dashboard />
+        {/* <Dashboard /> */}
+        <div className="container dashboardForm">
+          <div className="row">
+            <div className="col-m calorieDisplay">
+              <p>
+                Calories for {this.state.MenuNutrient.name} is
+                {this.state.MenuNutrient.calories}
+              </p>
+              {/* this is where the calorie counter guage will go */}
+            </div>
+          </div>
+          <div className="row">
+            <div className="card">
+              <div className="card-body">
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item" id="carbs">
+                    <p>Total Carbohydrates: {this.state.MenuNutrient.carbs}</p>
+                  </li>
+                  <li className="list-group-item" id="protein">
+                    <p>Total Protein: {this.state.MenuNutrient.protein}</p>
+                  </li>
+                  <li className="list-group-item" id="fat">
+                    <p>Total Fat: {this.state.MenuNutrient.fat}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
