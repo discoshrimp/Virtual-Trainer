@@ -15,7 +15,8 @@ let apis = {
     console.log(data);
     return axios.post("/newfood", data);
   },
-  getFood: () => {
+
+  getTotalCalorie: () => {
     return axios.get("/dailyprogress");
   },
   getArticles: () => {
@@ -32,7 +33,7 @@ let apis = {
   },
   getProfile: user => {
     console.log("profile to get: ", user);
-    return axios.get("/profile/"+ user);
+    return axios.get("/profile/" + user);
   },
   updateUser: userinfo => {
     console.log("saveuser: ", userinfo);

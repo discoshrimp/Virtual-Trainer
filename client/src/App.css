@@ -39,13 +39,29 @@ body {
 .nav-wrapper ul li a {
   color: red;
 }
-
+.home {
+  margin-top: 50px;
+}
+.display-dashboard {
+  background: rgba(5, 219, 159, 0.5);
+  font-size: 25px;
+  color: rgb(243, 7, 7);
+  font-weight: 500;
+}
+.display-dashboard h4 {
+  color: white;
+  text-align: center;
+}
+tbody tr th {
+  font-size: 20px;
+  color: white;
+}
 .quotes {
-  margin-top: 200px;
+  margin-top: 100px;
   font-family: "Pacifico", cursive;
   font-weight: 900;
   background-color: rgba(5, 219, 159, 0.1);
-  color: red;
+  color: rgb(88, 7, 3);
   line-height: 1.5em;
   letter-spacing: 0.4em;
 }
@@ -99,9 +115,11 @@ h4 {
 .panel h2 {
   color: red;
 }
-
 .article {
   color: yellow;
+}
+.datepub {
+  color: rgb(5, 219, 159);
 }
 
 .calorieDisplay {
@@ -112,10 +130,4 @@ h4 {
   background-color: rgba(5, 219, 159, 0.6);
   color: red;
   font-weight: 700;
-}
-.dashboardForm {
-  background: transparent;
-  font-size: 20px;
-  color: rgb(5, 219, 159);
-  font-weight: 500;
 }
